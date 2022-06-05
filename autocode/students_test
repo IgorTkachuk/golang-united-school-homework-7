@@ -187,7 +187,7 @@ func getPeople() (*People, *People){
 	ps3 := Person{
 		firstName: "Leonid",
 		lastName: "Tkachuk",
-		birthDay: time.Date(1979, 8, 2, 0, 0, 0, 0, time.UTC),
+		birthDay: time.Date(1977, 8, 2, 0, 0, 0, 0, time.UTC),
 	}
 
 	return &People{ps0, ps1, ps2, ps3}, &People{ps1, ps0, ps2, ps3} 
@@ -196,8 +196,8 @@ func getPeople() (*People, *People){
 func TestPeopleLenOk(t *testing.T){
 	p, _ := getPeople()
 	l := p.Len()
-	if l != 2 {
-		t.Errorf("Wants 2 got %d", l)
+	if l != 4 {
+		t.Errorf("Wants 4 got %d", l)
 	}
 
 }
@@ -216,16 +216,16 @@ func TestPeopleLesOk(t *testing.T){
 
 	isTruthly := p.Less(0, 1)
 	if !isTruthly {
-		t.Errorf("Less is not work properly")
+		t.Errorf("Less is not work properly 1")
 	}
 
 	isTruthly = p.Less(1, 2)
 	if !isTruthly {
-		t.Errorf("Less is not work properly")
+		t.Errorf("Less is not work properly 2")
 	}
 
 	isTruthly = p.Less(2, 3)
 	if !isTruthly {
-		t.Errorf("Less is not work properly")
+		t.Errorf("Less is not work properly 3")
 	}
 }
