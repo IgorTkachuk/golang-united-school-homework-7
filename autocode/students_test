@@ -165,19 +165,32 @@ func TestSetMethodErr(t *testing.T) {
 }
 
 func getPeople() (*People, *People){
+	ps0 := Person{
+		firstName: "Igor",
+		lastName: "Sechenov",
+		birthDay: time.Date(1978, 8, 2, 0, 0, 0, 0, time.UTC),
+	}
+
 	ps1 := Person{
 		firstName: "Igor",
 		lastName: "Tkachuk",
 		birthDay: time.Date(1978, 8, 2, 0, 0, 0, 0, time.UTC),
+	
 	}
-
+	
 	ps2 := Person{
-		firstName: "Olena",
-		lastName: "Ternova",
-		birthDay: time.Date(1995, 12, 1, 0, 0, 0, 0, time.UTC),
+		firstName: "Leonid",
+		lastName: "Tkachuk",
+		birthDay: time.Date(1978, 8, 2, 0, 0, 0, 0, time.UTC),
 	}
 
-	return &People{ps1, ps2}, &People{ps2, ps1} 
+	ps3 := Person{
+		firstName: "Leonid",
+		lastName: "Tkachuk",
+		birthDay: time.Date(1979, 8, 2, 0, 0, 0, 0, time.UTC),
+	}
+
+	return &People{ps0, ps1, ps2, ps3}, &People{ps1, ps0, ps2, ps3} 
 }
 
 func TestPeopleLenOk(t *testing.T){
@@ -196,5 +209,23 @@ func TestPeopleSwapOk(t *testing.T){
 	if !reflect.DeepEqual(p, swapedP) {
 		t.Errorf("Swap is not work properly")
 	}
+}
 
+func TestPeopleLesOk(t *testing.T){
+	p, _ := getPeople()
+
+	isTruthly := p.Less(0, 1)
+	if !isTruthly {
+		t.Errorf("Less is not work properly")
+	}
+
+	isTruthly = p.Less(1, 2)
+	if !isTruthly {
+		t.Errorf("Less is not work properly")
+	}
+
+	isTruthly = p.Less(2, 3)
+	if !isTruthly {
+		t.Errorf("Less is not work properly")
+	}
 }
